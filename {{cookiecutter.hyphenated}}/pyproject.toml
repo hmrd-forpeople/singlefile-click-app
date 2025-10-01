@@ -4,8 +4,8 @@ version = "0.1"
 description = "{{ cookiecutter.description or "" }}"
 readme = "README.md"
 authors = [{name = "{{ cookiecutter.author_name }}"}]
-license = "Apache-2.0"
-requires-python = ">=3.8"
+license = "CC0-1.0"
+requires-python = ">=3.13"
 classifiers = []
 dependencies = [
     "click"
@@ -25,4 +25,50 @@ CI = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.hyph
 {{ cookiecutter.hyphenated }} = "{{ cookiecutter.underscored }}.cli:cli"
 
 [project.optional-dependencies]
+dev = [
+    { include-group = "autoflake"},
+    { include-group = "bandit"},
+    { include-group = "black" },
+    { include-group = "flake8" },
+    { include-group = "installer" },
+    { include-group = "isort" },
+    { include-group = "test" },
+    "pre-commit",
+]
+autoflake = ["autoflake"]
+bandit = [
+    "bandit",
+    "tomli",
+]
+black = ["black"]
+flake8 = [
+    "flake8",
+    "flake8-bugbear",
+    "Flake8-pyproject",
+    "pep8-naming",
+]
+isort = ["isort"]
+installer = ["pyinstaller"]
 test = ["pytest"]
+
+[tool.black]
+line-length = 99
+
+[tool.isort]
+line_length = 99
+profile = "black"
+
+[tool.pytest.ini_options]
+console_output_style = "progress"
+minversion = "7.2.2"
+python_files = "test_*.py"
+addopts = "-vvvv --ignore-glob .venv* --ignore-glob venv*
+
+[tool.flake8]
+max-line-length = 99
+exclude = [".venv*", "venv*", "typings"]
+extend-ignore = ["E203", "E501"]
+extend-select = ["B950"]
+
+[tool.bandit]
+exclude_dirs = [".venv", "venv"]
