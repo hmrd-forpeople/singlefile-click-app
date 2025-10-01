@@ -9,7 +9,7 @@ on:
 
 jobs:
   Build-macOS:
-    if: ${{ github.ref_name == 'main' }}
+    if: {% raw %}${{ github.ref_name == 'main' }}{% endraw %}
     name: Build on macOS
     runs-on: macos-latest
     steps:
@@ -31,12 +31,12 @@ jobs:
       - name: Upload macOS artifact
         uses: actions/upload-artifact@v4
         with:
-          name: {{ cookiecutter.hyphenated }}-macos-${{ github.sha }}
+          name: {{ cookiecutter.hyphenated }}-macos-{% raw %}${{ github.sha }}{% endraw %}
           path: dist/{{ cookiecutter.hyphenated }}
           overwrite: true
 
   Build-Linux:
-    if: ${{ github.ref_name == 'main' }}
+    if: {% raw %}${{ github.ref_name == 'main' }}{% endraw %}
     name: Build on Linux
     runs-on: ubuntu-latest
     steps:
@@ -58,12 +58,12 @@ jobs:
       - name: Upload linux artifact
         uses: actions/upload-artifact@v4
         with:
-          name: {{ cookiecutter.hyphenated }}-linux-${{ github.sha }}
+          name: {{ cookiecutter.hyphenated }}-linux-{% raw %}${{ github.sha }}{% endraw %}
           path: dist/{{ cookiecutter.hyphenated }}
           overwrite: true
 
   Build-Windows:
-    if: ${{ github.ref_name == 'main' }}
+    if: {% raw %}${{ github.ref_name == 'main' }}{% endraw %}
     name: Build on Windows
     runs-on: windows-latest
     steps:
@@ -86,6 +86,6 @@ jobs:
       - name: Upload windows artifact
         uses: actions/upload-artifact@v4
         with:
-          name: {{ cookiecutter.hyphenated }}-windows-${{ github.sha }}
+          name: {{ cookiecutter.hyphenated }}-windows-{% raw %}${{ github.sha }}{% endraw %}
           path: dist/{{ cookiecutter.hyphenated }}.exe
           overwrite: true
