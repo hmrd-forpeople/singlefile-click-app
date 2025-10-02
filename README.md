@@ -79,4 +79,21 @@ Push your `main` branch to GitHub like this:
 git remote add origin git@github.com:YOURNAME/my-new-tool.git
 git push -u origin main
 ```
-The template will have created a GitHub Action which runs your tool's test suite against every commit.
+
+The template will have created GitHub Actions which does the following for every new pull request, as well as on updates to existing pull requests:
+ 1. Runs your tool's test suite
+ 1. Check code formatting with `black`
+ 1. Check to make sure your imports are sorted correctly with `isort`
+ 1. Check to make sure you don't have any unused imports or variables with `autoflake`
+ 1. Check for linting errors using `flake8`
+ 1. Check for security issues using `bandit`
+Configuration for all these tools lives in `pyproject.toml`, and you can run them locally (they will be run locally in modification mode using the pre-commit hooks if you installed them properly).
+
+It is recommended to set up branch protections so you can not push directly to main, but must go through the pull request process, to ensure this is all working properly.
+
+It will also have created a GitHub Action which will build your tool on every merge to main. This creates artifacts to be used later for releases.
+
+To create a release in GitHub, an Action will have been created that will run every time you push a new tag matching `v*`. It requires three different secrets to be defined for your repository:
+ - `GHA_CLI_PAT` - a classic personal access token with full repo control, as well as workflow permissions.
+ - `GHA_RELEASE_PAT` - a fine-grained token with metadata read access, as well as read and write access for code and workflows for your repository.
+ - `GHA_PAT` - a fine-grained token with metadata read access, as well as read and write access to actions.
