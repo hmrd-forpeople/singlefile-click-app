@@ -43,6 +43,8 @@ cd my-new-tool
 uv sync
 # Confirm your tool can be run from the command-line
 uv run my-new-tool --version
+# If you already have this as a git repository, install pre-commit hooks
+uv run pre-commit install --install-hooks
 ```
 You should see the following:
 ```bash
@@ -62,10 +64,11 @@ You can initialize a Git repository for your tool like this:
 ```bash
 cd my-new-tool
 git init
+# If you haven't already, initialize the pre-commit hooks
+uv run pre-commit install --install-hooks
+# Otherwise, you can just carry on from here
 git add .
 git commit -m "Initial structure from template"
-# Rename the 'master' branch to 'main':
-git branch -m master main
 ```
 ## Publishing your tool to GitHub
 
