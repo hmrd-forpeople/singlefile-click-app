@@ -62,7 +62,7 @@ profile = "black"
 console_output_style = "progress"
 minversion = "7.2.2"
 python_files = "test_*.py"
-addopts = "-vvvv --ignore-glob .venv* --ignore-glob venv*
+addopts = "-vvvv --ignore-glob .venv* --ignore-glob venv*"
 
 [tool.flake8]
 max-line-length = 99
