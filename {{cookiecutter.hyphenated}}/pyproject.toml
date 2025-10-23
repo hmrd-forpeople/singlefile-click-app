@@ -24,10 +24,10 @@ CI = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.hyph
 [project.scripts]
 {{ cookiecutter.hyphenated }} = "{{ cookiecutter.underscored }}.cli:cli"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-    { include-group = "autoflake"},
-    { include-group = "bandit"},
+    { include-group = "autoflake" },
+    { include-group = "bandit" },
     { include-group = "black" },
     { include-group = "flake8" },
     { include-group = "installer" },
